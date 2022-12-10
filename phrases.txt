@@ -1,0 +1,36 @@
+Inspirational
+ - 1: 
+ - 2: 
+ - 3: 
+ - 4: 
+ - 5: 
+Cringey
+ - 1: 
+ - 2: 
+ - 3: 
+ - 4: 
+ - 5:
+Platitudinousness
+ - 1: 
+ - 2: 
+ - 3: 
+ - 4: 
+ - 5:
+Alpha male CEO</option>
+- 1: 
+ - 2: 
+ - 3: 
+ - 4: 
+ - 5:
+Philosophization</option>
+ - 1: 
+ - 2: 
+ - 3: 
+ - 4: 
+ - 5:
+
+// 'vaguely
+// 'slightly'
+// 'moderately'
+// 'strongly'
+// 'extremely'
