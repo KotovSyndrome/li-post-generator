@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-// import axios from 'axios'
+import axios from 'axios'
+import LinkedInPost from './LinkedInPost'
+import Loading from './Loading'
 
 const Form = () => {
     const [formValues, setFormValues] = useState({
@@ -7,40 +9,75 @@ const Form = () => {
         modifier: 'none',
         level: 0
     })
+    const [linkedInPostData, setLinkedInPostData] = useState('')
+    const [loadingState, setLoadingState] = useState(false)
 
     const handleInput = (e) => {
         setFormValues({...formValues, [e.target.name]: e.target.value})
     }
 
-    const submitPost = () => {
-        // convert level to number
-        console.log('write a linked post about ....... that is very ____ ')
+    const levelToWord = (level) => {
+        if (level === '1') {
+            return ' vaguely'
+        }else if (level === '2') {
+            return ' slightly'
+        }else if (level === '3') {
+            return ' moderately'
+        }else if (level === '4') {
+            return ' strongly'
+        }else if (level === '5') {
+            return 'n extremely'
+        }    
+    }
+
+    const submitPost = async () => {
+        let newPrompt = ''
+
+        if (formValues.modifier !== 'none') {
+            console.log('Hit conditoin')
+            newPrompt = formValues.prompt.concat(`. Make a${levelToWord(formValues.level)} ${formValues.modifier} and lengthy LinkedIn-style post about this.`)
+        }
+
+        const resp = await axios.post('http://localhost:3001/createPost', {
+            prompt: newPrompt || formValues.prompt,
+            modifier: formValues.modifier,
+            modifierLevel: parseInt(formValues.level)
+        }, {
+            'Access-Control-Allow-Origin': '*'
+        })
+        setLinkedInPostData(resp.data)
+        // console.log('server response: ', resp.data)
     }
 
 
+
   return (
-    <div className='bg-darkmode-grey w-full h-full rounded-lg mt-10'>
-        <div className='flex flex-col items-center pt-6'>
+    <div className='bg-darkmode-grey w-full  rounded-lg mt-10'>
+        <div className='flex justify-center pt-6'>
+            <div className='p-4'>
+                {linkedInPostData ? <LinkedInPost textData={linkedInPostData}/> : (
+                    <div>
+                        <label className='text-white text-2xl'>Write a post about:</label>
+                        <textarea value={formValues.prompt} name='prompt' onChange={handleInput} placeholder='Ex. Today, I used an API for the first time after 6 months of learning JavaScript...' className='w-full h-32 bg-gray-600 text-white placeholder:text-slate-300 rounded-md mt-2'></textarea>
 
-            <label className='text-white text-2xl'>Write a post about:</label>
-            <textarea value={formValues.prompt} name='prompt' onChange={handleInput} placeholder='Ex. Today I used an API for the first time after 6 months of learning JavaScript...' className='w-10/12 h-32 bg-gray-600 text-white placeholder:text-slate-300 rounded-md mt-2'></textarea>
+                        <label className='text-white text-2xl mt-6 block'>Add some "special sauce" to your post:</label>
+                        <select className='w-full mt-2 rounded-md bg-blue-200' name='modifier' value={formValues.modifier} onChange={handleInput}>
+                            <option value='none'>None</option>
+                            <option value='inspirational'>Inspirational</option>
+                            <option value='cringey'>Cringey</option>
+                            <option value='arrogant'>Arrogant</option>
+                            <option value='philosophical'>Philosophical</option>
+                        </select>
 
-            <label className='text-white text-2xl mt-6'>Add some "special sauce" to your post:</label>
-            <select className='w-48 mt-2 rounded-md bg-blue-200' name='modifier' value={formValues.modifier} onChange={handleInput}>
-                <option value='none'>None</option>
-                <option value='inspirational'>Inspirational</option>
-                <option value='cringey'>Cringeyness</option>
-                <option value='platitude'>Platitudinousness</option>
-                <option value='arrogant'>Alpha male CEO</option>
-                <option value='philosophical'>Philosophization</option>
-            </select>
+                        <label htmlFor="default-range" className="block mb-2 text-lg font-medium text-white dark:text-white mt-6">How much sauce would you like?</label>
+                        <input id="default-range" type="range" value={formValues.level} min="0" max="5" step="1" name='level' onChange={handleInput} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 "></input>
 
-            <label htmlFor="default-range" className="block mb-2 text-lg font-medium text-white dark:text-white mt-6">Default range</label>
-            <input id="default-range" type="range" value={formValues.level} min="0" max="5" step="1" name='level' onChange={handleInput} className="w-8/12 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"></input>
-
-            <button className='bg-li-blue rounded-full px-5 p-1 drop-shadow-md mt-10 text-slate-100 w-6/12 text-xl' onClick={submitPost}>
-                Create Post
-            </button>
+                        <button className='bg-li-blue rounded-full px-5 py-2 drop-shadow-md my-10 text-slate-100 w-full text-xl hover:bg-li-blue-hover' onClick={submitPost}>
+                            Create Post
+                        </button>
+                    </div>
+                )}
+            </div>
         </div>
     </div>
   )

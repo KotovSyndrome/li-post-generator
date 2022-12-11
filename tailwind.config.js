@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       colors: {
         'li-blue': 'rgb(10,102,194)',
+        'li-blue-hover': 'rgba(10,102,194,0.8)',
         'darkmode-grey': 'rgb(29,34,38)',
       }
     },
