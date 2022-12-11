@@ -49,8 +49,9 @@ const Form = ({setLinkedInPostData}) => {
         })
 
         // resp.data.split('\n')
-        
+
         setLinkedInPostData(resp.data);
+        
         navigation("/post")
     }
 

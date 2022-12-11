@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage setLinkedInPostData={setLinkedInPostData}/>} />
         <Route path='/post' element={<PostPage linkedInPostData={linkedInPostData} />}/>
-        <Route path='/playground' element={<Playground />} />
+        {/* <Route path='/playground' element={<Playground />} /> */}
       </Routes>
     </div>
   );
