@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import LinkedInPost from './LinkedInPost'
 import Loading from './Loading'
+import { useNavigate } from 'react-router-dom';
 
-const Form = () => {
+const Form = ({setLinkedInPostData}) => {
     const [formValues, setFormValues] = useState({
         prompt: '',
         modifier: 'none',
         level: 0
     })
-    const [linkedInPostData, setLinkedInPostData] = useState('')
     const [loadingState, setLoadingState] = useState(false)
+
+    const navigation = useNavigate();
 
     const handleInput = (e) => {
         setFormValues({...formValues, [e.target.name]: e.target.value})
@@ -31,10 +32,11 @@ const Form = () => {
     }
 
     const submitPost = async () => {
+        setLoadingState(true)
         let newPrompt = ''
 
         if (formValues.modifier !== 'none') {
-            console.log('Hit conditoin')
+            console.log('Hit condition')
             newPrompt = formValues.prompt.concat(`. Make a${levelToWord(formValues.level)} ${formValues.modifier} and lengthy LinkedIn-style post about this.`)
         }
 
@@ -45,8 +47,11 @@ const Form = () => {
         }, {
             'Access-Control-Allow-Origin': '*'
         })
-        setLinkedInPostData(resp.data)
-        // console.log('server response: ', resp.data)
+
+        // resp.data.split('\n')
+        
+        setLinkedInPostData(resp.data);
+        navigation("/post")
     }
 
 
@@ -55,7 +60,7 @@ const Form = () => {
     <div className='bg-darkmode-grey w-full  rounded-lg mt-10'>
         <div className='flex justify-center pt-6'>
             <div className='p-4'>
-                {linkedInPostData ? <LinkedInPost textData={linkedInPostData}/> : (
+                {loadingState ? <Loading/> : (
                     <div>
                         <label className='text-white text-2xl'>Write a post about:</label>
                         <textarea value={formValues.prompt} name='prompt' onChange={handleInput} placeholder='Ex. Today, I used an API for the first time after 6 months of learning JavaScript...' className='w-full h-32 bg-gray-600 text-white placeholder:text-slate-300 rounded-md mt-2'></textarea>

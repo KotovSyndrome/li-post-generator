@@ -1,17 +1,21 @@
 import './App.css';
-import Form from './Components/Form'
-import Title from './Components/Title'
-import AuthButton from './Components/AuthButton'
+import Homepage from './Pages/Homepage'
+import { Route, Routes } from 'react-router';
+// import LinkedInPost from './Components/LinkedInPost';
+import PostPage from './Pages/PostPage';
+import Playground from './Pages/Playground';
+import { useState } from 'react';
 
 function App() {
+  const [linkedInPostData, setLinkedInPostData] = useState('')
 
   return (
     <div className='flex justify-center'>
-      <div className=''>
-        <Title />
-        <Form />
-        <AuthButton />
-      </div>
+      <Routes>
+        <Route path='/' element={<Homepage setLinkedInPostData={setLinkedInPostData}/>} />
+        <Route path='/post' element={<PostPage linkedInPostData={linkedInPostData} />}/>
+        <Route path='/playground' element={<Playground />} />
+      </Routes>
     </div>
   );
 }
