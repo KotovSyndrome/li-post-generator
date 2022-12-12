@@ -21,7 +21,7 @@ const PostPage = ({linkedInPostData}) => {
 
         <div className='bg-darkmode-grey w-full rounded-t-md mt-10'>
             <div className="flex items-center pl-3 pt-5">
-                <img className="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt='profile-picture'/>
+                <img className="h-12 w-12 rounded-full" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt='profile-avatar'/>
                 <div className="ml-2">
                     <div className="text-sm ">
                     <span className="font-semibold text-white">LinkedIn member</span>
