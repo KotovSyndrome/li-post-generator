@@ -3,7 +3,7 @@ let express = require('express');
 let axios = require('axios');
 let morgan = require('morgan');
 let cors = require('cors');
-let PORT = 3001;
+const PORT = process.env.PORT || 3001;
 let bodyParser = require('body-parser')
 dotenv.config();
 let url = 'https://api.openai.com/v1/completions';
