@@ -1,4 +1,4 @@
-const path = require("path");
+// const path = require("path");
 let dotenv = require('dotenv');
 let express = require('express');
 let axios = require('axios');
@@ -40,19 +40,19 @@ app.post('/createPost', (req, res) => {
     .then((data) => {
         console.log('data.data.choices', data.data.choices);
         res.status(200).send(data.data.choices[0].text)})
-    .catch((error) => console.log(error))
+    .catch((error) => console.log('axios backend:', error))
 });
 
 // Serve React App
-const sendIndex = (req, res) => {
-    res.sendFile('index.html', { root: path.join(__dirname, '../build/') });
-}
+// const sendIndex = (req, res) => {
+//     res.sendFile('index.html', { root: path.join(__dirname, '../build/') });
+// }
 
-app.get('/', sendIndex);
+// app.get('/', sendIndex);
 
 // serve static files
 // Statically serve all other content (robots.txt, manifest.json, all js files, etc...)
-app.use(express.static(path.join(__dirname, "../build/")));
+// app.use(express.static(path.join(__dirname, "../build/")));
 
 app.listen(PORT, () => {
     console.log(`listening on port ${PORT}`);
