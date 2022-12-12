@@ -40,7 +40,7 @@ const Form = ({setLinkedInPostData}) => {
             newPrompt = formValues.prompt.concat(`. Make a${levelToWord(formValues.level)} ${formValues.modifier} and lengthy LinkedIn-style post about this.`)
         }
 
-        const resp = await axios.post('https://li-post-generator-production.up.railway.app/createPost', {
+        const resp = await axios.post('https://backend-production-5112.up.railway.app/createPost', {
             prompt: newPrompt || formValues.prompt,
             modifier: formValues.modifier,
             modifierLevel: parseInt(formValues.level)
