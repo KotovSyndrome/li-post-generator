@@ -1,7 +1,6 @@
 import './App.css';
 import Homepage from './Pages/Homepage'
 import { Route, Routes } from 'react-router';
-// import LinkedInPost from './Components/LinkedInPost';
 import PostPage from './Pages/PostPage';
 import { useState } from 'react';
 

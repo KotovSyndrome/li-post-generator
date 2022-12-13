@@ -1,6 +1,7 @@
 import React from 'react'
 import Form from '../Components/Form'
 import Title from '../Components/Title'
+import CreatedBy from '../Components/CreatedBy'
 
 const Homepage = ({setLinkedInPostData}) => {
   
@@ -8,6 +9,7 @@ const Homepage = ({setLinkedInPostData}) => {
     <div>
         <Title />
         <Form  setLinkedInPostData={setLinkedInPostData}/>
+        <CreatedBy />
     </div>
   )
 }

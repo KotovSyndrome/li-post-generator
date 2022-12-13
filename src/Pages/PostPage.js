@@ -3,6 +3,7 @@ import React from 'react'
 import PostBottom from '../assets/postBottom.png'
 import { VscDebugRestart } from 'react-icons/vsc'
 import { useNavigate } from 'react-router';
+import CreatedBy from '../Components/CreatedBy';
 
 
 const PostPage = ({linkedInPostData}) => {
@@ -49,9 +50,11 @@ const PostPage = ({linkedInPostData}) => {
             <img src={PostBottom} alt='linkedin-post' />
         </div>
 
-        <div className='flex justify-center mt-8'>
+        <div className='flex justify-center mt-8 mb-20'>
             <button className='bg-li-blue px-5 py-2 rounded-md text-white hover:bg-li-blue-hover' onClick={() => navigation('/')}><VscDebugRestart className='inline text-xl' /><span className='pl-1' >Create another post</span></button>
         </div>
+
+        <CreatedBy />
     </div>  
   )
 }
