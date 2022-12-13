@@ -48,8 +48,6 @@ const Form = ({setLinkedInPostData}) => {
             'Access-Control-Allow-Origin': '*'
         })
 
-        // resp.data.split('\n')
-
         setLinkedInPostData(resp.data);
         
         navigation("/post")
@@ -58,7 +56,7 @@ const Form = ({setLinkedInPostData}) => {
 
 
   return (
-    <div className='bg-darkmode-grey w-full  rounded-lg mt-10'>
+    <div className='bg-darkmode-grey w-full  rounded-lg mt-10 mb-20'>
         <div className='flex justify-center pt-6'>
             <div className='p-4'>
                 {loadingState ? <Loading/> : (
